@@ -9,7 +9,7 @@ public class Sharpening implements IPixelProcessor {
         int blueValue = 0, redValue = 0, greenValue = 0;
 
         int[][] processedPixels = new int[height][width];
-        int[][] bluredPixels = new ImageModel().getBlur().processImage(originalPixels);
+        int[][] bluredPixels = new ImageModel().processBlur(originalPixels);
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 blueValue = (2 * PixelConverter.getBlue(originalPixels[i][j]))

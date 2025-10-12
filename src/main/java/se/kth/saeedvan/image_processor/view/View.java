@@ -23,13 +23,13 @@ public class View extends VBox {
                 
                 • Usage for Window/Level: Load an image → adjust the sliders → apply the Window/Level filter.
                  
-                • The histogram will show the RGB intensity for each pixel.
+                • The histogram will show the frequency of RGB intensity for each pixel.
                 
                 • Save your processed image by clicking File → Save
                 
                 """;
 
-    private HistogramView hV;
+    private final HistogramView hV;
     private BorderPane bP;
     private ScrollPane sP;
     private MenuBar menuBar;
@@ -55,7 +55,7 @@ public class View extends VBox {
             controller.handleRotateImage(imageView.getImage());
         });
         processTab.getItems().get(1).setOnAction(event -> {
-            controller.handleIvertColors(imageView.getImage());
+            controller.handleInvertColors(imageView.getImage());
         });
         processTab.getItems().get(2).setOnAction(event -> {
             controller.handleGrayScale(imageView.getImage());
@@ -87,10 +87,14 @@ public class View extends VBox {
             }
             image = FileIO.readImage(imageFile);
             imageView = new ImageView(image);
+            if (image.getHeight() < sP.getHeight())
+                imageView.setFitHeight(sP.getHeight());
+            if (image.getWidth() < sP.getWidth())
+                imageView.setFitWidth(sP.getWidth());
             sP.setContent(imageView);
-            controller.convertAndView(image, null);
             for(MenuItem mi : processTab.getItems()) { mi.setDisable(false); }
             fileTab.getItems().get(1).setDisable(false);
+            controller.signalUpdateToView(image);
             controller.setOriginalImage(image);
 
         });
@@ -161,7 +165,6 @@ public class View extends VBox {
         hB.setSpacing(15);
         hB.getChildren().addAll(wVB, lVB);
         bP.setBottom(hB);
-
     }
 
     private void setAlert(String msg, Alert.AlertType at, String headerText) {
@@ -205,7 +208,7 @@ public class View extends VBox {
         fileChooser.getExtensionFilters().add(filter);
     }
 
-    public HistogramView getHV() {
-        return hV;
+    public void updateHV(int[][] histogramValues) {
+        hV.updateView(histogramValues);
     }
 }

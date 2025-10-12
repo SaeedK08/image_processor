@@ -62,9 +62,9 @@ public class HistogramView extends VBox {
         // blue
         }
         // styling
-        seriesRed.getNode().setStyle("-fx-stroke: red; -fx-stroke-width: 1px");
-        seriesGreen.getNode().setStyle("-fx-stroke: green; -fx-stroke-width: 1px");
-        seriesBlue.getNode().setStyle("-fx-stroke: blue; -fx-stroke-width: 1px");
+        seriesRed.getNode().setStyle("-fx-stroke: red; -fx-stroke-width: 2px");
+        seriesGreen.getNode().setStyle("-fx-stroke: green; -fx-stroke-width: 2px");
+        seriesBlue.getNode().setStyle("-fx-stroke: blue; -fx-stroke-width: 2px");
     }
     /**
      * CLear the display.
