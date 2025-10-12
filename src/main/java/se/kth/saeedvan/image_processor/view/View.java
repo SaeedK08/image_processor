@@ -14,6 +14,21 @@ import java.io.File;
 
 
 public class View extends VBox {
+    private final String helpInfo = """
+                • Load an image by clicking File → Open. Note: Allowed file extensions [png, jpg, jpeg, bmp]
+                
+                • Apply filters: Grayscale, Blur, Sharpen, etc. Note: Filters are found in the Process tab.
+                
+                • Adjust contrast using the Window/Level sliders. Note: Only works on Grayscale images.
+                
+                • Usage for Window/Level: Load an image → adjust the sliders → apply the Window/Level filter.
+                 
+                • The histogram will show the RGB intensity for each pixel.
+                
+                • Save your processed image by clicking File → Save
+                
+                """;
+
     private HistogramView hV;
     private BorderPane bP;
     private ScrollPane sP;
@@ -57,7 +72,7 @@ public class View extends VBox {
         processTab.getItems().get(3).setOnAction(event -> {
             int windowValue = (int) windowSlider.getValue();
             if (windowValue <= 0) {
-                setAlert("Window value need to be set", Alert.AlertType.WARNING);
+                setAlert("Window value need to be set", Alert.AlertType.WARNING, null);
                 return;
             }
             int levelValue = (int) levelSlider.getValue();
@@ -67,7 +82,7 @@ public class View extends VBox {
         fileTab.getItems().getFirst().setOnAction(event -> {
             File imageFile = fileChooser.showOpenDialog(this.getScene().getWindow());
             if (imageFile == null) {
-                setAlert("No image was found", Alert.AlertType.ERROR);
+                setAlert("No image was found", Alert.AlertType.ERROR, null);
                 return;
             }
             image = FileIO.readImage(imageFile);
@@ -83,15 +98,19 @@ public class View extends VBox {
         fileTab.getItems().get(1).setOnAction(event -> {
             File file = fileChooser.showSaveDialog(this.getScene().getWindow());
             if (file == null) {
-                setAlert("No file was chosen", Alert.AlertType.WARNING);
+                setAlert("No file was chosen", Alert.AlertType.WARNING, null);
                 return;
             }
             if (!FileIO.writeImage(imageView.getImage(), file)) {
-                setAlert("Could not save image", Alert.AlertType.ERROR);
+                setAlert("Could not save image", Alert.AlertType.ERROR, null);
             }
         });
 
         fileTab.getItems().get(2).setOnAction(event -> {System.exit(0);});
+
+        helpTab.getItems().getFirst().setOnAction(event -> {
+            setAlert(helpInfo, Alert.AlertType.INFORMATION, "How to Use the Application");
+        });
     }
 
     public void updateImage(Image image) {
@@ -145,8 +164,10 @@ public class View extends VBox {
 
     }
 
-    private void setAlert(String msg, Alert.AlertType at) {
+    private void setAlert(String msg, Alert.AlertType at, String headerText) {
         Alert alert = new Alert(at);
+        if (headerText != null)
+            alert.setHeaderText(headerText);
         alert.setContentText(msg);
         alert.showAndWait();
     }
@@ -174,10 +195,13 @@ public class View extends VBox {
         for(MenuItem mi : processTab.getItems()) { mi.setDisable(true); }
 
         helpTab = new Menu("Help");
+        MenuItem helpItem = new MenuItem("About / Help");
+        helpTab.getItems().add(helpItem);
+
         menuBar.getMenus().addAll(fileTab, processTab, helpTab);
         fileChooser = new FileChooser();
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter(
-                "Image files", "*.png", "*.jpg", "*.jpeg", "*.bmp", "*.svg");
+                "Image files", "*.png", "*.jpg", "*.jpeg", "*.bmp");
         fileChooser.getExtensionFilters().add(filter);
     }
 
