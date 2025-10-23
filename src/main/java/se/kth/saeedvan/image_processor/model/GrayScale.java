@@ -2,7 +2,20 @@ package se.kth.saeedvan.image_processor.model;
 
 import se.kth.saeedvan.image_processor.utils.PixelConverter;
 
+/**
+ * A pixel processor that converts a color image to grayscale.
+ * <p>
+ *  This implementation averages the RGB components of each pixel
+ *  to compute a single intensity value, resulting in a grayscale image.
+ * </p>
+ */
 public class GrayScale implements IPixelProcessor {
+
+    /**
+     * Converts each pixel in the original pixel matrix to grayscale by averaging its RGB components.
+     * @param originalPixels a 2D array where each pixel value encodes RGB color.
+     * @return  a new 2D array where each pixel is replaced with its grayscale intensity.
+     */
     public int[][] processImage(int[][] originalPixels) {
         int height = originalPixels.length;
         int width = originalPixels[0].length;

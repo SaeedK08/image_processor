@@ -1,13 +1,9 @@
 package se.kth.saeedvan.image_processor.view;
 
-import javafx.application.Platform;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.Side;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 
 /**

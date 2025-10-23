@@ -2,7 +2,26 @@ package se.kth.saeedvan.image_processor.model;
 
 import se.kth.saeedvan.image_processor.utils.PixelConverter;
 
+/**
+ * A pixel processor that sharpens a grayscale image.
+ * <p>
+ *     This implementation applies the sharpening method, Unsharp Masking, by creating a blurred version of
+ *     the image, subtracting it from the original and then adding the difference to the original.
+ * </p>
+ */
 public class Sharpening implements IPixelProcessor {
+
+    /**
+     * Enhances the sharpness of the provided image pixel matrix using Unsharp Masking.
+     * <p>
+     * For each pixel, the method computes a new value by adding
+     * the difference between the original and the blurred pixel to the original pixel.
+     * Pixel values that fall outside the valid range (0–255) are either set to 0 or 255.
+     * </p>
+     *
+     * @param originalPixels a 2D array representing the original image pixels
+     * @return a new 2D array containing the sharpened image pixels
+     */
     public int[][] processImage(int[][] originalPixels) {
         int height = originalPixels.length;
         int width = originalPixels[0].length;

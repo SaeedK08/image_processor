@@ -2,7 +2,17 @@ package se.kth.saeedvan.image_processor.model;
 
 import se.kth.saeedvan.image_processor.utils.PixelConverter;
 
+
+/**
+ *  A pixel processor that inverts the colors of an image.
+ */
 public class InvertColors implements IPixelProcessor{
+
+    /**
+     * This method subtracts each RGB component for each pixel from its max value 255.
+     * @param originalPixels a 2D array where each pixel value encodes RGB color.
+     * @return a new 2D array where each pixel is color inverted.
+     */
     public int[][] processImage(int[][] originalPixels) {
         int height = originalPixels.length;
         int width = originalPixels[0].length;

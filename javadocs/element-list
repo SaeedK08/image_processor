@@ -1,0 +1,6 @@
+module:se.kth.saeedvan.image_processor
+se.kth.saeedvan.image_processor
+se.kth.saeedvan.image_processor.io
+se.kth.saeedvan.image_processor.model
+se.kth.saeedvan.image_processor.utils
+se.kth.saeedvan.image_processor.view
