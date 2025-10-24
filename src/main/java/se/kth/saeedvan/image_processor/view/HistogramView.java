@@ -6,6 +6,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 
+import java.util.Objects;
+
 /**
  * A customized JavaFX component, extending VBox, displaying a histogram over
  frequencies
@@ -21,6 +23,9 @@ public class HistogramView extends VBox {
         seriesRed = new XYChart.Series<>();
         seriesGreen = new XYChart.Series<>();
         seriesBlue = new XYChart.Series<>();
+        seriesRed.setName("red");
+        seriesGreen.setName("green");
+        seriesBlue.setName("blue");
         LineChart<Number, Number> histogramChart = new LineChart<>(new
                 NumberAxis(), new NumberAxis());
         histogramChart.getData().addAll(seriesRed, seriesGreen, seriesBlue);
@@ -29,6 +34,7 @@ public class HistogramView extends VBox {
         histogramChart.setTitle("Frequency per pixel intensity");
         this.getChildren().add(histogramChart);
         this.setAlignment(Pos.CENTER); // align children center
+        histogramChart.getStylesheets().add("legendStyle.css");
     }
     /**
      * Set, and display, values for this histogram chart. The values should be

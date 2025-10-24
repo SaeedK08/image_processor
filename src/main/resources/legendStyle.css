@@ -1,0 +1,17 @@
+
+
+/* style legend symbols (ensure selector targets legend symbol) */
+.default-color0.chart-legend-item-symbol {
+    -fx-background-color: red;
+    -fx-padding: 6px;
+}
+
+.default-color1.chart-legend-item-symbol {
+    -fx-background-color: green;
+    -fx-padding: 6px;
+}
+
+.default-color2.chart-legend-item-symbol {
+    -fx-background-color: blue;
+    -fx-padding: 6px;
+}
