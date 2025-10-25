@@ -78,8 +78,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>se.kth.saeedvan.image_editor/se.kth.saeedvan.image_processor.HelloApplication
-                            </mainClass>
+                            <mainClass>se.kth.saeedvan.image_processor.MainApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
